@@ -1,5 +1,6 @@
 package com.apress.ws.endpoint;
 
+import org.springframework.web.client.RestTemplate;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -16,8 +17,11 @@ public class GeoLocationEndpoint {
 	public GetLocationResponse getLocation(@RequestPayload GetLocation getLocationRequest) {
 		System.out.println(getLocationRequest.getIp());
 		GetLocationResponse response = new GetLocationResponse();
-		response.setStatus("success");
+		String url = "http://ip-api.com/json/";
+		RestTemplate restTemplate = new RestTemplate();
+		response = restTemplate.getForObject(url + getLocationRequest.getIp(), GetLocationResponse.class);
 		return response;
+
 	}
 
 }
