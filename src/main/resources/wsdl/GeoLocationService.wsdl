@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:garage:services:geolocation:types" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GeoLocationService" targetNamespace="urn:garage:services:geolocation:types">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:garage:services:geolocation:types">
+      <xsd:element name="GetLocation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ip" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetLocationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="status" type="xsd:string" />
+          	<xsd:element name="country" type="xsd:string"></xsd:element>
+          	<xsd:element name="city" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetLocationRequest">
+    <wsdl:part element="tns:GetLocation" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="GetLocationResponse">
+    <wsdl:part element="tns:GetLocationResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="GeoLocationService">
+    <wsdl:operation name="GetLocation">
+      <wsdl:input message="tns:GetLocationRequest"/>
+      <wsdl:output message="tns:GetLocationResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GeoLocationServiceSOAP" type="tns:GeoLocationService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetLocation">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GeoLocationService">
+    <wsdl:port binding="tns:GeoLocationServiceSOAP" name="GeoLocationServiceSOAP">
+      <soap:address location="http://localhost:8081/geolocation"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
