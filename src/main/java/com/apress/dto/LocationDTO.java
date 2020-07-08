@@ -1,5 +1,12 @@
 package com.apress.dto;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+@Builder(toBuilder = true)
+@Setter
+@Getter
 public class LocationDTO {
 
 	protected String status;
@@ -7,29 +14,5 @@ public class LocationDTO {
 	protected String country;
 
 	protected String city;
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
 
 }
