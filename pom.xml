@@ -107,10 +107,9 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <schemaLanguage>WSDL</schemaLanguage>
-                    <schemaDirectory>src/main/resources/wsdl</schemaDirectory>
+                    <schemaDirectory>src/main/resources/schema</schemaDirectory>
                     <schemaIncludes>
-                        <schemaInclude>*.wsdl</schemaInclude>
+                        <schemaInclude>*.xsd</schemaInclude>
                     </schemaIncludes>
                 </configuration>
               </plugin>

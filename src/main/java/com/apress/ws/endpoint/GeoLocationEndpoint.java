@@ -10,7 +10,7 @@ import com.apress.dto.LocationDTO;
 import com.apress.service.LocationService;
 import com.apress.service.mappers.LocationMapper;
 
-import garage.services.geolocation.types.GetLocation;
+import garage.services.geolocation.types.GetLocationRequest;
 import garage.services.geolocation.types.GetLocationResponse;
 
 @Endpoint
@@ -23,7 +23,7 @@ public class GeoLocationEndpoint {
 
 	@PayloadRoot(namespace = "urn:garage:services:geolocation:types", localPart = "GetLocation")
 	@ResponsePayload
-	public GetLocationResponse getLocation(@RequestPayload GetLocation getLocationRequest) {
+	public GetLocationResponse getLocation(@RequestPayload GetLocationRequest getLocationRequest) {
 
 		LocationDTO locationDTO = locationService.getLocationByIp(getLocationRequest.getIp());
 		GetLocationResponse response = locationMapper.toGetLocationResponse(locationDTO);
