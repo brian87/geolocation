@@ -21,7 +21,7 @@ public class GeoLocationEndpoint {
 	@Autowired
 	private LocationMapper locationMapper;
 
-	@PayloadRoot(namespace = "urn:garage:services:geolocation:types", localPart = "GetLocation")
+	@PayloadRoot(namespace = "urn:garage:services:geolocation:types", localPart = "GetLocationRequest")
 	@ResponsePayload
 	public GetLocationResponse getLocation(@RequestPayload GetLocationRequest getLocationRequest) {
 
