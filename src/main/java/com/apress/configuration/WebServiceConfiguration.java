@@ -25,7 +25,7 @@ public class WebServiceConfiguration extends WsConfigurerAdapter {
 		return new ServletRegistrationBean<>(messageDispatcherServlet, "/ws/*");
 	}
 
-	@Bean(name = "geolocation")
+	@Bean(name = "geoLocation")
 	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema typesSchema) {
 		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
 		wsdl11Definition.setPortTypeName("GeoLocationService");
