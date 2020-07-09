@@ -19,6 +19,7 @@ public class GeolocationApplication {
 		StringResult res = new StringResult();
 		marshaller.marshal(request, res);
 		System.out.println(res);
+
 	}
 
 }
