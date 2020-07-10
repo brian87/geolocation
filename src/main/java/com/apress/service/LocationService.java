@@ -13,7 +13,7 @@ public class LocationService {
 
 	public LocationDTO getLocationByIp(String ip) {
 		RestTemplate restTemplate = new RestTemplate();
-		ip = getHostAddress(ip);
+//		ip = getHostAddress(ip);
 		if (isPrivateIPAddress(ip)) {
 			ip = restTemplate.getForObject("https://api.ipify.org/", String.class);
 		}
@@ -45,9 +45,7 @@ public class LocationService {
 			ia = InetAddress.getByAddress(ip);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
-			return false;
 		}
-
 		return ia.isSiteLocalAddress();
 	}
 
