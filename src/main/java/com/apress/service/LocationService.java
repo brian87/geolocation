@@ -1,8 +1,5 @@
 package com.apress.service;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,37 +9,21 @@ import com.apress.dto.LocationDTO;
 public class LocationService {
 
 	public LocationDTO getLocationByIp(String ip) {
+		if(isPrivateIp(ip)) {
+			ip = getPublicIp();
+		}
 		RestTemplate restTemplate = new RestTemplate();
-		// if ip is "0:0:0:0:0:0:0:1" then find the hostAddress
-		if (ip.equalsIgnoreCase("0:0:0:0:0:0:0:1")) {
-			ip = getIpLocalHost(ip);
-		}
-		if (isPrivateIPAddress(ip)) {
-			ip = restTemplate.getForObject("https://api.ipify.org/", String.class);
-		}
-		return restTemplate.getForObject("http://ip-api.com/json/" + ip, LocationDTO.class);
+		LocationDTO locationDTO  = restTemplate.getForObject("http://ip-api.com/json/" + ip, LocationDTO.class);
+		return locationDTO;
 	}
 
-	private String getIpLocalHost(String ip) {
-		InetAddress inetAddress = null;
-		try {
-			inetAddress = InetAddress.getLocalHost();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-		return inetAddress.getHostAddress();
+	private String getPublicIp() {
+		RestTemplate restTemplate = new RestTemplate();
+		return restTemplate.getForObject("https://api.ipify.org/", String.class);
 	}
 
-	private static boolean isPrivateIPAddress(String ipAddress) {
-		InetAddress ia = null;
-		try {
-			InetAddress ad = InetAddress.getByName(ipAddress);
-			byte[] ip = ad.getAddress();
-			ia = InetAddress.getByAddress(ip);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-		return ia.isSiteLocalAddress();
+	private boolean isPrivateIp(String ip) {
+		return ip.equalsIgnoreCase("0:0:0:0:0:0:0:1");
 	}
-
+	
 }
