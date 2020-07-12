@@ -12,7 +12,7 @@ import com.apress.dto.LocationDTO;
 public class LocationService {
 
 	public LocationDTO getLocationByIp(String ip) {
-		if (isPrivateIp(ip) || ip.equalsIgnoreCase("0:0:0:0:0:0:0:1")) {
+		if (isPrivateIp(ip)) {
 			ip = getPublicIp();
 		}
 		RestTemplate restTemplate = new RestTemplate();
@@ -32,9 +32,10 @@ public class LocationService {
 			byte[] ipAddress = ad.getAddress();
 			ia = InetAddress.getByAddress(ipAddress);
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
+			return false;
 		}
-		return ia.isSiteLocalAddress();
+		return (ip.equalsIgnoreCase("0:0:0:0:0:0:0:1") || ia.isSiteLocalAddress());
+
 	}
 
 }
