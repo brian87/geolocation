@@ -12,8 +12,10 @@ import com.apress.service.mappers.LocationMapper;
 
 import garage.services.geolocation.types.GetLocationRequest;
 import garage.services.geolocation.types.GetLocationResponse;
+import lombok.extern.slf4j.Slf4j;
 
 @Endpoint
+@Slf4j
 public class GeoLocationEndpoint {
 
 	@Autowired
@@ -24,7 +26,7 @@ public class GeoLocationEndpoint {
 	@PayloadRoot(namespace = "urn:garage:services:geolocation:types", localPart = "GetLocationRequest")
 	@ResponsePayload
 	public GetLocationResponse getLocation(@RequestPayload GetLocationRequest getLocationRequest) {
-
+		log.info("Starting endpoint getLocation");
 		LocationDTO locationDTO = locationService.getLocationByIp(getLocationRequest.getIp());
 		GetLocationResponse response = locationMapper.toGetLocationResponse(locationDTO);
 
