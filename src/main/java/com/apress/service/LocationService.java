@@ -26,16 +26,13 @@ public class LocationService {
 	}
 
 	private boolean isPrivateIp(String ip) {
-		InetAddress ia = null;
+		InetAddress address;
 		try {
-			InetAddress ad = InetAddress.getByName(ip);
-			byte[] ipAddress = ad.getAddress();
-			ia = InetAddress.getByAddress(ipAddress);
-		} catch (UnknownHostException e) {
+			address = InetAddress.getByName(ip);
+		} catch (UnknownHostException exception) {
 			return false;
 		}
-		return (ip.equalsIgnoreCase("0:0:0:0:0:0:0:1") || ia.isSiteLocalAddress());
-
+		return (address.isSiteLocalAddress() || address.isLoopbackAddress());
 	}
 
 }
