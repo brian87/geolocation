@@ -115,7 +115,7 @@
 				</executions>
 				<configuration>
 					<schemaDirectory>${project.basedir}/src/main/resources/schema</schemaDirectory>
-					<clearOutputDir>false</clearOutputDir>
+					<clearOutputDir>true</clearOutputDir>
 				</configuration>
 			</plugin>
 		</plugins>
