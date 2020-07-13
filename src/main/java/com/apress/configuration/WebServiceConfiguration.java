@@ -39,7 +39,7 @@ public class WebServiceConfiguration extends WsConfigurerAdapter {
 		return wsdl11Definition;
 	}
 
-	@Bean
+	@Bean(name = "geoLocationSchema")
 	public XsdSchema typesSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("schema/types.xsd"));
 	}
