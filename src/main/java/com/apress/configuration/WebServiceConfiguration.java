@@ -13,7 +13,7 @@ import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.server.EndpointInterceptor;
 import org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor;
 import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
-import org.springframework.ws.soap.security.xwss.callback.SimplePasswordValidationCallbackHandler;
+import org.springframework.ws.soap.security.wss4j2.callback.SimplePasswordValidationCallbackHandler;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
@@ -72,5 +72,6 @@ public class WebServiceConfiguration extends WsConfigurerAdapter {
 	@Override
 	public void addInterceptors(List<EndpointInterceptor> interceptors) {
 		interceptors.add(payloadLoggingInterceptor());
+		interceptors.add(securityInterceptor());
 	}
 }
